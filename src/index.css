@@ -1,0 +1,225 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Sora:wght@500;600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Manrope", sans-serif;
+  --font-display: "Sora", sans-serif;
+  --color-brand-50: #eef9f8;
+  --color-brand-100: #d8f2ef;
+  --color-brand-500: #159b91;
+  --color-brand-600: #0f8179;
+  --color-brand-700: #0d6964;
+  --color-ink-950: #102a2d;
+  --color-ink-700: #3e5b5f;
+  --color-ink-500: #6e8588;
+  --color-mist-50: #f7fbfb;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background: var(--color-mist-50);
+  color: var(--color-ink-950);
+  font-family: var(--font-sans);
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+select,
+textarea {
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--color-brand-500);
+  box-shadow: 0 0 0 3px rgb(21 155 145 / 15%);
+  outline: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-brand-500);
+  outline-offset: 3px;
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-reveal {
+  animation: hero-rise 700ms ease-out both;
+}
+
+.hero-reveal-delayed {
+  animation: hero-rise 700ms 120ms ease-out both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 600ms ease, transform 600ms ease;
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes services-marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.technology-orbit {
+  animation: technology-orbit 48s linear infinite;
+}
+
+.technology-orbit-item {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -1.5rem;
+  margin-left: -1.5rem;
+  transform: rotate(var(--orbit-angle)) translateY(-8.25rem);
+}
+
+.technology-orbit-logo {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border: 1px solid rgb(255 255 255 / 12%);
+  border-radius: 1rem;
+  background: rgb(255 255 255 / 8%);
+  color: #d8f2ef;
+  box-shadow: 0 12px 28px rgb(0 0 0 / 16%);
+  backdrop-filter: blur(12px);
+  animation: technology-orbit-counter 48s linear infinite;
+}
+
+.technology-orbit:hover,
+.technology-orbit:focus-within {
+  animation-play-state: paused;
+}
+
+@keyframes technology-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes technology-orbit-counter {
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
+@media (min-width: 640px) {
+  .technology-orbit-item {
+    transform: rotate(var(--orbit-angle)) translateY(-10rem);
+  }
+}
+
+.services-marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+  animation: services-marquee 48s linear infinite;
+}
+
+.services-marquee-track:hover,
+.services-marquee-track:focus-within {
+  animation-play-state: paused;
+}
+
+@keyframes service-stack-enter {
+  from {
+    scale: 0.985;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .service-stack-card {
+    position: sticky;
+    top: calc(5.25rem + var(--stack-index) * 0.55rem);
+    transform-origin: center top;
+  }
+
+  @supports (animation-timeline: view()) {
+    .service-stack-card {
+      animation: service-stack-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 50%;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-reveal,
+  .hero-reveal-delayed,
+  .reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .technology-orbit,
+  .technology-orbit-logo {
+    animation: none;
+  }
+
+  .services-marquee-track {
+    width: 100%;
+    animation: none;
+  }
+
+  .services-marquee-track > div[aria-hidden="true"] {
+    display: none;
+  }
+
+  .services-marquee-track > div:not([aria-hidden="true"]) {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .service-stack-card {
+    position: static;
+    scale: 1;
+    animation: none;
+  }
+}
