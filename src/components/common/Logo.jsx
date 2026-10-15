@@ -27,7 +27,9 @@ function Logo({ className = "size-9", textClassName = "font-display font-semibol
 
         
       </div>
-      <span className={textClassName}>{company.name}</span>
+      <span className={`brand-wordmark ${textClassName}`} data-text={company.name}>
+        {company.name}
+      </span>
     </div>
   );
 }

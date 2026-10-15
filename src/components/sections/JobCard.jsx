@@ -1,4 +1,5 @@
 import { Clock, MapPin, Briefcase, ArrowRight } from "lucide-react";
+import { contactInformation } from "../../data";
 
 function JobCard({ job }) {
   return (
@@ -26,7 +27,7 @@ function JobCard({ job }) {
         <p className="mt-4 max-w-xl text-sm leading-6 text-ink-700">{job.summary}</p>
       </div>
       <a
-        href={`mailto:careers@northstardigital.example?subject=Application: ${job.title}`}
+        href={`mailto:${contactInformation.email}?subject=${encodeURIComponent(`Application: ${job.title}`)}`}
         className="group/btn inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-ink-950 px-5 py-3 text-sm font-semibold text-white shadow-md transition-all hover:bg-brand-700 hover:shadow-lg"
       >
         <span>Apply now</span>

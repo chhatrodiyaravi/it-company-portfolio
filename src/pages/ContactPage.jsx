@@ -38,7 +38,22 @@ function ContactPage() {
     if (!form.message.trim())
       nextErrors.message = "Please tell us a little about your project.";
     setErrors(nextErrors);
-    if (Object.keys(nextErrors).length === 0) setSubmitted(true);
+    if (Object.keys(nextErrors).length === 0) {
+      const selectedSubject = contactInformation.subjects.find(
+        (subject) => subject.id === form.subject,
+      );
+      const subject = selectedSubject?.label || "Project inquiry";
+      const body = [
+        `Name: ${form.name.trim()}`,
+        `Email: ${form.email.trim()}`,
+        `Subject: ${subject}`,
+        "",
+        form.message.trim(),
+      ].join("\n");
+
+      window.location.href = `mailto:${contactInformation.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -307,7 +322,9 @@ function ContactPage() {
                 {submitted && (
                   <div className="flex items-center gap-2 rounded-lg bg-emerald-50 px-3.5 py-2 text-sm font-medium text-emerald-800 border border-emerald-200">
                     <CheckCircle2 className="size-4 text-emerald-600" />
-                    <span>Thanks! Your inquiry has been received.</span>
+                    <span>
+                      Your email app should open with your inquiry ready to send.
+                    </span>
                   </div>
                 )}
               </div>

@@ -94,6 +94,27 @@ a {
   transform: translateY(0);
 }
 
+.brand-wordmark {
+  position: relative;
+  display: inline-block;
+}
+
+.brand-wordmark::after {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  color: var(--color-brand-600);
+  content: attr(data-text);
+  clip-path: inset(0 100% 0 0);
+  pointer-events: none;
+  transition: clip-path 400ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .brand-wordmark::after,
+.group:focus-visible .brand-wordmark::after {
+  clip-path: inset(0);
+}
+
 @keyframes services-marquee {
   to {
     transform: translateX(-50%);
@@ -194,6 +215,10 @@ a {
     animation: none;
     opacity: 1;
     transform: none;
+    transition: none;
+  }
+
+  .brand-wordmark::after {
     transition: none;
   }
 

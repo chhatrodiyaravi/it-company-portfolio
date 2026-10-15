@@ -1,5 +1,5 @@
 export const contactInformation = {
-  email: "hello@northstardigital.example",
+  email: "raviahirai@gmail.com",
   phone: "+1 (415) 555-0148",
   location: "San Francisco, CA (Worldwide Remote)",
   address: "410 Market Street, Suite 500, San Francisco, CA 94105",
